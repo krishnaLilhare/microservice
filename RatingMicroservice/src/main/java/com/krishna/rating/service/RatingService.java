@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RatingService {
@@ -25,11 +26,20 @@ public class RatingService {
 
     public List<Rating> getRatingByUserId(Integer id)
     {
-        return ratingRepository.findByUserId(id);
+        try
+        {
+          return ratingRepository.findByUserId(id);
+        }catch (Exception e)
+        {
+            throw new RuntimeException("Rating is not present with id = "+id,e);
+        }
     }
 
-    public List<Rating> getRatingByHotelId(Integer id)
-    {
-        return ratingRepository.findByHotelId(id);
+    public List<Rating> getRatingByHotelId(Integer id) {
+        try {
+            return ratingRepository.findByHotelId(id);
+        } catch (Exception e) {
+            throw new RuntimeException("hotel is not present with id = " + id, e);
+        }
     }
 }

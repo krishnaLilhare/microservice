@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HotelService {
@@ -25,6 +26,13 @@ public class HotelService {
 
     public Hotel getHotelById(Integer id)
     {
-        return hotelRepository.findById(id).orElseThrow();
+       Optional<Hotel> optionalHotel = hotelRepository.findById(id);
+
+       if(optionalHotel.isPresent())
+       {
+           return optionalHotel.get();
+       }else {
+           throw new RuntimeException("Hotel is not present with id = "+id);
+       }
     }
 }

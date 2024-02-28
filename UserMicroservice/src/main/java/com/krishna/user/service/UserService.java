@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -60,15 +61,21 @@ public class UserService {
 
         // *****  using feign client   *****
 
-        User user = userRepository.findById(id).orElseThrow();
-        List<Rating> ratings = ratingServiceController.getAllRatingByUserId(user.getId());
+        Optional<User> optionalUser = userRepository.findById(id);
 
-        for (Rating rating : ratings) {
-            Hotel hotel = hotelServiceController.getHotelById(rating.getHotelId());
-            rating.setHotel(hotel);
+        if(optionalUser.isPresent())
+        {
+            User user = optionalUser.get();
+            List<Rating> ratings = ratingServiceController.getAllRatingByUserId(user.getId());
+
+            for (Rating rating : ratings) {
+                Hotel hotel = hotelServiceController.getHotelById(rating.getHotelId());
+                rating.setHotel(hotel);
+            }
+            user.setRatings(ratings);
+            return user;
+        }else {
+            throw new RuntimeException("user not found with id = "+id);
         }
-
-        user.setRatings(ratings);
-        return user;
     }
 }
