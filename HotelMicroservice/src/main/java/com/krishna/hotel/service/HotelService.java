@@ -4,7 +4,6 @@ import com.krishna.hotel.model.Hotel;
 import com.krishna.hotel.respository.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
