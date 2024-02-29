@@ -9,7 +9,6 @@ import com.krishna.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +39,6 @@ public class UserService {
 
     public User getByUser(Integer id)
     {
-
         // *****  using rest template   *****
 
 //        User user = userRepository.findById(id).orElseThrow();
