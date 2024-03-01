@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hotel-microservice
+spec:
+  selector:
+    matchLabels:
+      app: hotel-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hotel-app
+    spec:
+      containers:
+        - name: hotel-microservice-k8s
+          image: 471112969494.dkr.ecr.us-east-1.amazonaws.com/employee:latest
+          ports:
+            - containerPort: 8080
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: hotel-microservice-svc
+spec:
+  selector:
+    app: hotel-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
