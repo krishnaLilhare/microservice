@@ -11,7 +11,6 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class Rating {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ratingId;

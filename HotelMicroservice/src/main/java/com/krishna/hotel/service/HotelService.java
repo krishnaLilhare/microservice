@@ -31,7 +31,7 @@ public class HotelService {
        {
            return optionalHotel.get();
        }else {
-           throw new RuntimeException("Hotel is not present with hotel id = "+id);
+           throw new RuntimeException("Hotel is not present with id = "+id);
        }
     }
 }
