@@ -72,7 +72,7 @@ public class UserService {
             }
             user.setRatings(ratings);
             return user;
-        }else {
+        } else {
             throw new RuntimeException("user not found with id = "+id);
         }
     }
